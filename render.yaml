@@ -22,12 +22,12 @@ services:
         sync: false
 
   # Frontend Static Site (React)
-  - type: static_site
+  - type: web
     name: school-connect-ui
-    env: node
+    runtime: static # This is the magic line for static sites
     rootDir: frontend
     buildCommand: npm install && npm run build
-    publishPath: build
+    staticPublishPath: build
     envVars:
       - key: REACT_APP_BACKEND_URL
         value: https://school-connect-api.onrender.com
