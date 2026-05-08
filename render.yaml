@@ -2,7 +2,7 @@ services:
   # Backend Web Service (FastAPI)
   - type: web
     name: school-connect-api
-    plan: free # Explicitly using the Free Tier
+    plan: free # Keep this for the backend
     env: python
     rootDir: backend
     buildCommand: pip install -r requirements.txt
@@ -24,11 +24,11 @@ services:
   # Frontend Static Site (React)
   - type: web
     name: school-connect-ui
-    plan: free # Explicitly using the Free Tier
     runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: build
+    # plan: free (REMOVED to fix error)
     envVars:
       - key: REACT_APP_BACKEND_URL
         value: https://school-connect-api.onrender.com
