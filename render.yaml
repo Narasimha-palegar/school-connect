@@ -24,10 +24,13 @@ services:
   # Frontend Static Site (React)
   - type: web
     name: school-connect-ui
-    runtime: static # This is the magic line for static sites
+    runtime: static
     rootDir: frontend
-    buildCommand: npm install && npm run build
+    # Added --legacy-peer-deps to solve the npm install conflict
+    buildCommand: npm install --legacy-peer-deps && npm run build
     staticPublishPath: build
     envVars:
       - key: REACT_APP_BACKEND_URL
         value: https://school-connect-api.onrender.com
+      - key: CI
+        value: false
