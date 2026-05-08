@@ -21,7 +21,7 @@ services:
         sync: false # Set this in Render Dashboard
 
   # Frontend Static Site (React)
-  - type: static
+  - type: static_site
     name: school-connect-ui
     env: node
     rootDir: frontend
