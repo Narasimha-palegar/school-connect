@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 45 25% 96%;
+        --foreground: 40 8% 8%;
+        --card: 0 0% 100%;
+        --card-foreground: 40 8% 8%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 40 8% 8%;
+        --primary: 13 71% 56%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 156 38% 21%;
+        --secondary-foreground: 0 0% 100%;
+        --muted: 42 20% 93%;
+        --muted-foreground: 40 3% 35%;
+        --accent: 42 85% 65%;
+        --accent-foreground: 40 8% 8%;
+        --destructive: 0 62% 50%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 40 15% 90%;
+        --input: 40 15% 90%;
+        --ring: 13 71% 56%;
+        --chart-1: 13 71% 56%;
+        --chart-2: 156 38% 21%;
+        --chart-3: 42 85% 65%;
+        --chart-4: 152 24% 38%;
+        --chart-5: 13 67% 69%;
+        --radius: 0.75rem;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    html,
+    body {
+        @apply bg-background text-foreground;
+        font-family: "Work Sans", system-ui, -apple-system, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .font-display {
+        font-family: "Chivo", "Work Sans", sans-serif;
+        letter-spacing: -0.02em;
+    }
+}
+
+@layer utilities {
+    .font-display {
+        font-family: "Chivo", sans-serif;
+    }
+    .font-body {
+        font-family: "Work Sans", sans-serif;
+    }
+    .bg-canvas {
+        background-color: #f7f6f3;
+    }
+    .bg-sidebar {
+        background-color: #f0efea;
+    }
+    .border-hair {
+        border-color: #e5e4e0;
+    }
+    .text-ink {
+        color: #141412;
+    }
+    .text-ink-muted {
+        color: #575652;
+    }
+    .brand-gradient {
+        background: linear-gradient(135deg, #df5c3d 0%, #e88d77 100%);
+    }
+}
+
+/* Scrollbar polish */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #d8d6cf;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #c2bfb5;
+}
+
+@layer base {
+    [data-debug-wrapper="true"] {
+        display: contents !important;
+    }
+}

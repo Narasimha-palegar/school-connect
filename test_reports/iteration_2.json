@@ -1,0 +1,44 @@
+{
+  "summary": "Iteration 2 testing complete. 47/47 backend pytest cases pass (15 new + 32 regression after updating two iter-1 tests for the new real-email contract). Frontend: login signup link removed, /signup redirects to /login, forgot-password flow no longer leaks debug OTP and advances to step 2 with toast, teacher sidebar has Students item between My Classes and Attendance, /teacher/students shows class tabs (5-A/5-B/6-A) + Add student modal opens, Lost & Found Report-item modal contains JPEG/PNG image upload field. Real Resend email confirmed via backend.err.log (Email sent id=... lines for forgot-password, lost-found claimed, lost-found resolved). Same-status update does NOT re-trigger email. Teacher (non-admin) can update lost-found status. File upload accepts JPEG/PNG, rejects non-image (400) and >5MB (400); download works with Bearer header and ?auth= query, returns 401 without token.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "demo seed", "issue": "Parent demo password hash in Mongo did NOT match parent123 at start of run — login returned 401. Had to manually re-hash via auth_utils.hash_password and update DB before parent-token-dependent tests could run. Likely caused by an earlier reset-password test that stomped the parent demo user, OR the seed uses a different bcrypt cost on each run. seed.run_seed should idempotently upsert demo passwords. Same risk flagged in iteration_1."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/backend/tests/test_iteration2.py",
+    "/app/test_reports/pytest/pytest_results.xml",
+    "/app/test_reports/pytest/iteration2_results.xml"
+  ],
+  "action_items": [
+    "Make seed.run_seed idempotent for demo passwords (admin/teacher/parent) — re-upsert password_hash on every startup so a reset-password or stale hash cannot lock out demo accounts.",
+    "Consider extending the same idempotent re-seed to demo user 'name' (still drifting due to /api/profile updates from past tests).",
+    "Optional: emit stronger structured logging (JSON) for emails so future tests don't have to grep raw text 'Email sent (id=...)' from supervisor stderr."
+  ],
+  "critical_code_review_comments": [
+    "auth.py forgot-password leaks user existence indirectly: success vs. 'If the email exists' message — current implementation returns the existence-safe message only on miss but a 'Reset code sent — please check your email.' on hit. Either both should be identical, or revert to always-OK. Currently only an information-leak in error responses, low severity.",
+    "files.py download endpoint accepts the access JWT in a query string (?auth=) for <img> rendering — JWT will end up in browser history / referer headers. Acceptable trade-off but document or use short-lived signed URLs in a future iteration.",
+    "storage_service.put_object/get_object are synchronous wrapped via asyncio.to_thread — fine, but 403-refresh logic uses module-level _storage_key without locking around the second call; two concurrent uploads after token expiry could race-init twice. Low impact.",
+    "shared.py update_lost_found: state-transition guard is correct (open->claimed triggers email, claimed->claimed does not), but resolved->claimed would also trigger a 'claimed' email even though the prior state was already terminal. Consider restricting transitions to forward-only.",
+    "files.py /upload accepts up to 5MB but reads the entire body into memory before size check — under load, large-payload DoS is possible. Use Content-Length header pre-check or stream-and-abort.",
+    "JWT still in localStorage as 'sc_token' (carried over from iter 1) and there is still no rate-limit / brute-force lockout on /api/auth/login (playbook expectation)."
+  ],
+  "updated_files": [
+    "/app/backend/tests/backend_test.py (rewrote test_register_returns_otp_debug -> test_register_and_verify_via_mongo_otp; rewrote test_forgot_reset_password to fetch OTPs from Mongo)",
+    "/app/backend/tests/test_iteration2.py (new — 15 cases)"
+  ],
+  "success_rate": {"backend": "100% (47/47)", "frontend": "100% of tested flows (7/7)"},
+  "test_credentials": "admin@school.com/admin123, teacher@school.com/teacher123, parent@school.com/parent123 — parent password had to be re-hashed via DB before tests; now working again. RESEND_OWNER_EMAIL=narasimha.palegar.07@gmail.com is the redirect target for Resend sandbox.",
+  "seed_data_creation": "All TEST_-prefixed students, lost-found items, parent users created during the run were cleaned up by the tests themselves. Parent demo password was repaired via direct Mongo update (set hash for 'parent123', name 'John Doe', verified True).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Both regression and new feature suites under /app/backend/tests/ pass with: pytest /app/backend/tests/ -v (47 cases). Email integration is real Resend in sandbox mode — _sandbox_to() in email_service.py redirects all sends to RESEND_OWNER_EMAIL. To validate emails, tail /var/log/supervisor/backend.err.log and grep 'Email sent (id='. JWT in localStorage 'sc_token'. Public URL: https://connect-school-2.preview.emergentagent.com. If parent demo login starts failing again, re-hash with auth_utils.hash_password('parent123') and update users collection — the seed isn't idempotent for password hashes.",
+  "rca of the issue": "Parent demo login 401 at test start — DB password_hash for parent@school.com no longer matched 'parent123'. Reproduce: curl POST /api/auth/login parent@school.com/parent123 -> 401. Mitigation applied: hashed parent123 with auth_utils.hash_password and updated users collection. Permanent fix (main agent): make seed.run_seed call db.users.update_one with $set on password_hash for the three demo accounts on every startup, not just $setOnInsert."
+}

@@ -1,0 +1,155 @@
+{
+  "project_name": "School Connect",
+  "theme": "light",
+  "archetype": "Organic & Earthy + Swiss Brutalist Tension",
+  "design_philosophy": {
+    "vibe": "Academic, trustworthy, modern, approachable.",
+    "core_principles": [
+      "No generic 'tech-bro' blue or overused purple gradients.",
+      "Organic colors applied to strict, high-contrast structural layouts.",
+      "Clear visual hierarchy to manage dense dashboard data (Admin) and task-driven views (Teacher)."
+    ]
+  },
+  "typography": {
+    "primary_heading": {
+      "family": "Chivo",
+      "google_font_url": "https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100..900;1,100..900&display=swap",
+      "usage": "H1, H2, large metrics, hero sections. MUST use tight tracking (tracking-tight)."
+    },
+    "body": {
+      "family": "Work Sans",
+      "google_font_url": "https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap",
+      "usage": "Paragraphs, labels, table data, buttons."
+    },
+    "scales": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter text-[#141412]",
+      "h2": "text-2xl sm:text-3xl font-bold tracking-tight text-[#141412]",
+      "h3": "text-xl sm:text-2xl font-bold tracking-tight text-[#141412]",
+      "h4": "text-lg font-bold text-[#141412]",
+      "body": "text-base font-normal leading-relaxed text-[#575652]",
+      "small": "text-sm font-medium uppercase tracking-[0.1em] text-[#575652]"
+    }
+  },
+  "colors": {
+    "background": {
+      "main": "#F7F6F3",
+      "surface": "#FFFFFF",
+      "sidebar": "#F0EFEA"
+    },
+    "brand": {
+      "primary": "#DF5C3D",
+      "primary_hover": "#C74B2F",
+      "primary_foreground": "#FFFFFF",
+      "secondary": "#214A39",
+      "secondary_foreground": "#FFFFFF",
+      "accent": "#F2C55C"
+    },
+    "text": {
+      "primary": "#141412",
+      "secondary": "#575652",
+      "disabled": "#A3A19A"
+    },
+    "border": {
+      "light": "#E5E4E0",
+      "dark": "#141412"
+    },
+    "status": {
+      "success": "#2E7D32",
+      "success_bg": "#E8F5E9",
+      "warning": "#ED6C02",
+      "warning_bg": "#FFF3E0",
+      "error": "#D32F2F",
+      "error_bg": "#FFEBEE",
+      "info": "#0288D1",
+      "info_bg": "#E1F5FE"
+    },
+    "charts": [
+      "#DF5C3D",
+      "#214A39",
+      "#F2C55C",
+      "#4A7A64",
+      "#E88D77"
+    ]
+  },
+  "layout_and_spacing": {
+    "grid": {
+      "admin_dashboard": "grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6",
+      "teacher_dashboard": "grid-cols-1 lg:grid-cols-3 gap-6",
+      "parent_dashboard": "grid-cols-1 md:grid-cols-2 gap-6"
+    },
+    "spacing": {
+      "card_padding": "p-6 sm:p-8",
+      "section_gap": "gap-8 sm:gap-12"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-[#DF5C3D] text-white hover:bg-[#C74B2F] rounded-lg px-6 py-2.5 font-medium transition-colors shadow-sm",
+      "secondary": "bg-[#214A39] text-white hover:bg-[#1A3A2C] rounded-lg px-6 py-2.5 font-medium transition-colors shadow-sm",
+      "outline": "bg-transparent border-2 border-[#141412] text-[#141412] hover:bg-[#141412] hover:text-white rounded-lg px-6 py-2.5 font-medium transition-colors"
+    },
+    "cards": {
+      "base": "bg-white border border-[#E5E4E0] rounded-xl shadow-sm overflow-hidden",
+      "interactive": "hover:-translate-y-1 hover:shadow-md transition-all duration-200"
+    },
+    "inputs": {
+      "base": "h-12 w-full bg-white border border-[#E5E4E0] rounded-lg px-4 text-[#141412] focus:border-[#DF5C3D] focus:ring-2 focus:ring-[#DF5C3D]/20 outline-none transition-all"
+    },
+    "sidebar": {
+      "container": "w-64 bg-[#F0EFEA] border-r border-[#E5E4E0] flex flex-col h-screen fixed left-0 top-0 z-40",
+      "link_default": "flex items-center gap-3 px-4 py-3 text-[#575652] hover:bg-[#E5E4E0] hover:text-[#141412] rounded-lg mx-3 transition-colors",
+      "link_active": "flex items-center gap-3 px-4 py-3 bg-white text-[#DF5C3D] shadow-sm rounded-lg mx-3 font-semibold border-l-4 border-[#DF5C3D]"
+    },
+    "tables": {
+      "container": "w-full border-collapse",
+      "header": "bg-[#F7F6F3] text-left text-sm font-semibold text-[#575652] border-b border-[#E5E4E0] py-3 px-4",
+      "row": "border-b border-[#E5E4E0] hover:bg-[#F9F9F8] transition-colors",
+      "cell": "py-4 px-4 text-sm text-[#141412]"
+    }
+  },
+  "pages": {
+    "auth": {
+      "layout": "Split screen (desktop). Left: Hero Image (cover), Right: Form container.",
+      "container": "flex min-h-screen bg-[#F7F6F3]",
+      "image_section": "hidden lg:block lg:w-1/2 relative bg-[#214A39]",
+      "form_section": "w-full lg:w-1/2 flex items-center justify-center p-8 sm:p-12",
+      "form_card": "w-full max-w-md bg-white p-8 rounded-2xl shadow-sm border border-[#E5E4E0]"
+    },
+    "dashboard_common": {
+      "layout": "Sidebar on left (w-64), Main content area on right.",
+      "header": "h-16 border-b border-[#E5E4E0] bg-white/70 backdrop-blur-xl flex items-center justify-between px-8 sticky top-0 z-30"
+    }
+  },
+  "media": {
+    "images": [
+      {
+        "category": "auth_hero",
+        "url": "https://static.prod-images.emergentagent.com/jobs/113940ed-fcbf-43a6-ac5d-a71d46d3f8f8/images/880c889459b0bf352f5e6eaf147ac86c7f1327fe71fa970569efdbe356293ed1.png",
+        "description": "Abstract minimalist 3D composition of educational items, terracotta and deep pine green. Use on Login/Signup split screen left side."
+      },
+      {
+        "category": "dashboard_welcome",
+        "url": "https://static.prod-images.emergentagent.com/jobs/113940ed-fcbf-43a6-ac5d-a71d46d3f8f8/images/17a8cf4b629319ba4c89a00648c7391e0acb4b7fa8c96b36d298b55c0a5420db.png",
+        "description": "3D graduation cap and coffee mug. Use for 'Welcome back' banner in Admin/Teacher dashboards."
+      },
+      {
+        "category": "empty_state",
+        "url": "https://static.prod-images.emergentagent.com/jobs/113940ed-fcbf-43a6-ac5d-a71d46d3f8f8/images/f81499d36f6a3fe69dddad6cd8345d97a4fa4506cc72102c2ee344670ab9cddb.png",
+        "description": "3D magnifying glass over blank document. Use for zero-data states (no students, no announcements, etc)."
+      }
+    ]
+  },
+  "testing": {
+    "mandatory_requirement": "All interactive and key informational elements MUST include a 'data-testid' attribute (e.g., data-testid='login-submit-button', data-testid='teacher-row-1')."
+  },
+  "instructions_to_main_agent": [
+    "Use JavaScript (.js/.jsx) exclusively, not TypeScript.",
+    "Do NOT use HTML native date pickers or selects. Use Shadcn components heavily, but strip their default borders/radii to match the guidelines above.",
+    "Implement the 'Chivo' and 'Work Sans' fonts via Google Fonts in index.html or global CSS.",
+    "Rely strictly on the provided media URLs. Do not use placeholders (like via.placeholder.com).",
+    "Admin Dashboard: Ensure dense Data Tables use the outlined table styles with hover effects.",
+    "Teacher Dashboard: Needs task-driven UI (attendance UI, grading UI). Use generous padding (p-6).",
+    "Parent Dashboard: Read-only views primarily. Use large metric cards and simple charts.",
+    "Always apply 'data-testid' on interactive elements."
+  ]
+}
