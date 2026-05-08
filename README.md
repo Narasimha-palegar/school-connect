@@ -115,3 +115,4 @@ Frontend (`/app/frontend/.env`): `REACT_APP_BACKEND_URL` (pre-configured, do not
 - **P1** — Wire real OTP email (Resend/SendGrid key pending), brute-force lockout on login, admin-side password reset for teachers
 - **P2** — Move JWT to httpOnly cookie, file uploads (homework attachments, profile picture), in-app notification bell
 - **P3** — Multi-school tenancy, fee management, transport tracking
+"# school-connect-two" 
