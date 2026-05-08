@@ -3,7 +3,7 @@ uvicorn
 motor
 pydantic[email]
 python-multipart
-python-jose[cryptography]
+PyJWT
 passlib[bcrypt]
 python-dotenv
 resend
