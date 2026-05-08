@@ -8,25 +8,25 @@ services:
     startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: MONGO_URL
-        sync: false # Set this in Render Dashboard
+        sync: false
       - key: DB_NAME
         value: school_connect
       - key: CORS_ORIGINS
-        value: "*" # Update this later with your frontend URL for better security
+        value: "*"
       - key: JWT_SECRET
         generateValue: true
       - key: JWT_ALGORITHM
         value: HS256
       - key: RESEND_API_KEY
-        sync: false # Set this in Render Dashboard
+        sync: false
 
   # Frontend Static Site (React)
-  - type: static_site
+  - type: web
     name: school-connect-ui
-    env: node
+    runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build
-    publishPath: build
+    staticPublishPath: build
     envVars:
       - key: REACT_APP_BACKEND_URL
-        value: https://school-connect-api.onrender.com # Update if your API name differs
+        value: https://school-connect-api.onrender.com
