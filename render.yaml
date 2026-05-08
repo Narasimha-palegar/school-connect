@@ -2,6 +2,7 @@ services:
   # Backend Web Service (FastAPI)
   - type: web
     name: school-connect-api
+    plan: free # Explicitly using the Free Tier
     env: python
     rootDir: backend
     buildCommand: pip install -r requirements.txt
@@ -23,6 +24,7 @@ services:
   # Frontend Static Site (React)
   - type: web
     name: school-connect-ui
+    plan: free # Explicitly using the Free Tier
     runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build
